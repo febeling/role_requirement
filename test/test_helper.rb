@@ -7,7 +7,7 @@ require "ostruct"
 
 def render_template_with_locals(abs_name, locals = {})
   template = File.read(File.join( abs_name) )
-  ERB.new(template, nil, "-").result(OpenStruct.new(locals).send(:binding))
+  ERB.new(template, nil, "-").result(OpenStruct.new(locals).instance_eval{binding})
 end
 
 def include_rendered_template(abs_name, locals = {})
